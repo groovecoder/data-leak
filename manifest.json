@@ -1,14 +1,23 @@
 {
-  "manifest_version": 2,
-  "name": "js-instrument",
-  "version": "1.0",
-
-  "description": "logs access to certain JS APIs. Taken from OpenWPM.",
-
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"]
+    "manifest_version": 2,
+    "name": "js-instrument",
+    "version": "1.0",
+    "description": "logs access to certain JS APIs. Taken from OpenWPM.",
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "js/content.js"
+            ]
+        }
+    ],
+    "background": {
+        "persistent": true,
+        "scripts": [
+            "js/localforage.js",
+            "js/events.js"
+        ]
     }
-  ]
 }
