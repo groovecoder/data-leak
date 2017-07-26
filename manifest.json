@@ -3,6 +3,10 @@
     "name": "js-instrument",
     "version": "1.0",
     "description": "logs access to certain JS APIs. Taken from OpenWPM.",
+    "browser_action": {
+        "default_title": "js-instrument",
+        "default_popup": "popup/list.html"
+    },
     "content_scripts": [
         {
             "matches": [
@@ -16,7 +20,7 @@
     "background": {
         "persistent": true,
         "scripts": [
-            "js/localforage.js",
+            "js/localforage.min.js",
             "js/events.js"
         ]
     }

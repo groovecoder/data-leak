@@ -665,7 +665,7 @@ function insertScript(text, data) {
 
 function emitMsg(type, msg) {
   // console.log('type: ', type, '; msg: ', msg, '; msg.value: ', msg.value);
-  localforage.setItem(type,{msg, value:msg.value})
+  // localforage.setItem(type,{msg, value:msg.value})
   //self.port.emit(type, msg);
 }
 
