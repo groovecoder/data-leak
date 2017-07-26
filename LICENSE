@@ -1,8 +1,8 @@
-js-instrument:
+data-leak:
 Copyright © 2017 Luke Crouch
 Licensed GPL v3
 
-js-instrument as a whole is presently Licensed GPL v3+, though
+data-leak as a whole is presently Licensed GPL v3+, though
 many portions of the code are dual-licensed under other free/open source
 licenses.
 

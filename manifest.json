@@ -1,9 +1,14 @@
 {
   "manifest_version": 2,
-  "name": "js-instrument",
+  "name": "Data Leak",
   "version": "1.0",
 
-  "description": "logs access to certain JS APIs. Taken from OpenWPM.",
+  "description": "Logs potentially unsafe data leaving the browser. Inspired by CLIQZ and OpenWPM.",
+
+  "icons": {
+    "48": "icon.png",
+    "96": "icon.png"
+  },
 
   "content_scripts": [
     {
