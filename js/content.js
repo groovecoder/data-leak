@@ -1,9 +1,6 @@
-
 function getPageScript() {
   // Intrumentation injection code is based on privacybadgerfirefox
   // https://github.com/EFForg/privacybadgerfirefox/blob/master/data/fingerprinting.js
-
-  // code below is not a content script: no Firefox APIs should be used
 
   // return a string
   return "(" + function () {
@@ -609,7 +606,7 @@ function getPageScript() {
     windowProperties.forEach(function(property) {
       instrumentObjectProperty(window, "window", property);
     });
-    instrumentObject(window.Storage.prototype, "window.Storage");
+    // instrumentObject(window.Storage.prototype, "window.Storage");
 
     // Access to document.cookie
     instrumentObjectProperty(window.document, "window.document", "cookie", {

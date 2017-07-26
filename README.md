@@ -1,15 +1,15 @@
-# js-instrument
+# data-leak
 
 ![Screenshot](screenshot.png "Screenshot")
 
-A Web Extension version of [OpenWPM](https://github.com/citp/OpenWPM) and
-[Privacy Badger](https://github.com/EFForg/privacybadger) code for detecting
-which APIs are being used ... for fingerprinting.
+A [Browser Extension](https://developer.mozilla.org/en-US/Add-ons/WebExtensions)
+to help detect potentially unsafe data leaving the browser. Including ...
 
-Specifically started from [this version of OpenWPM
-content.js](https://github.com/citp/OpenWPM/blob/1b0bafbba5bf9fd3d9049d013a7e589e12cc6fc3/automation/Extension/firefox/data/content.js)
+- A webRequest listener version of [CLIQZ code](https://github.com/cliqz-oss/browser-core/blob/master/modules/antitracking/sources/attrack.es) for detecting potentially unsafe data leaving the browser.
+- A content script version of [OpenWPM](https://github.com/citp/OpenWPM) and [Privacy Badger](https://github.com/EFForg/privacybadger) code for detecting which APIs are being used ... for fingerprinting.
+- A browserAction for displaying all of the above.
 
-This extension simply display the API calls in the console - it does not store
+This extension simply detects and logs network and API data - it does not store
 anything in a database. If you need all that good stuff, you should really look
 into OpenWPM - it's good people.
 
@@ -19,7 +19,7 @@ You should really use the [`web-ext`](https://www.npmjs.com/package/web-ext)
 tool - it's great. After you've installed it globally ...
 
 ```
-cd js-instrument
+cd data-leak
 web-ext run
 ```
 
@@ -31,3 +31,9 @@ In the Firefox browser that opens:
 
 You should also see lots of output in the format: `type: logCall ; msg:
 <Object> ; msg.value: `
+
+## Credits
+* [CLIQZ](https://cliqz.com/)
+* [OpenWPM](https://github.com/citp/OpenWPM)
+* [Privacy Badger](https://www.eff.org/privacybadger)
+* [Data Leak by Chameleon Design from the Noun Project](https://thenounproject.com/search/?q=data%20leak&i=796007)

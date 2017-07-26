@@ -1,10 +1,10 @@
 {
     "manifest_version": 2,
-    "name": "js-instrument",
+    "name": "Data Leak",
     "version": "1.0",
     "description": "logs access to certain JS APIs. Taken from OpenWPM.",
     "browser_action": {
-        "default_title": "js-instrument",
+                    "default_title": "js-instrument",
         "default_popup": "popup/list.html"
     },
     "content_scripts": [
@@ -23,5 +23,9 @@
             "js/localforage.min.js",
             "js/events.js"
         ]
-    }
+    },
+    "icons": {
+        "48": "icon.png",
+        "96": "icon.png"
+    },
 }
