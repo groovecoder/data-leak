@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 function getPageScript() {
   // Intrumentation injection code is based on privacybadgerfirefox
   // https://github.com/EFForg/privacybadgerfirefox/blob/master/data/fingerprinting.js
