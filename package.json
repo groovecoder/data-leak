@@ -1,0 +1,27 @@
+{
+  "name": "data-leak",
+  "version": "1.0.0",
+  "description": "A Browser Extension to help detect potentially unsafe data leaving the browser",
+  "devDependencies": {
+    "eslint": "^4.3.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "web-ext": "^1.10.1"
+  },
+  "scripts": {
+    "build": "web-ext build -s src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/groovecoder/data-leak.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/groovecoder/data-leak/issues"
+  },
+  "homepage": "https://github.com/groovecoder/data-leak#readme"
+}
