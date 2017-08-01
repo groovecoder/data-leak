@@ -15,5 +15,8 @@
       "matches": ["<all_urls>"],
       "js": ["content.js"]
     }
-  ]
+  ],
+  "background": {
+  "scripts": ["webRequest.bundle.js."]
+}
 }
