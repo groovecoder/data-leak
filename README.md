@@ -14,10 +14,13 @@ anything in a database. If you need all that good stuff, you should really look
 into OpenWPM - it's good people.
 
 ## Run it
+You should really use the web-ext tool - it's great. After you've installed it globally ...
+
 ```
 cd data-leak
 npm install
 npm run build
+web-ext run -s src
 ```
 
 In the Firefox browser that opens:
