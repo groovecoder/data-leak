@@ -4,6 +4,7 @@ class WebRequestListener {
   constructor (shouldStoreParams) {
     this.storeParams = shouldStoreParams
     this.data = {}
+    this.tabHost = []
     const req = browser.webRequest // eslint-disable-line no-undef
     req.onBeforeRequest.addListener(this.handleBeforeRequest, undefined, ['requestBody'])
     req.onBeforeSendHeaders.addListener(this.handleBeforeSendHeaders, undefined, ['requestHeaders'])
@@ -24,12 +25,21 @@ class WebRequestListener {
       this.data[dest]['tuples'].push({src, dest, paramKey, paramValue})
     }
   }
-  examineUrl (urlString, originUrlString) {
-    const parsedUrl = new URL(urlString, undefined, true) // parse query
-    const parsedOriginUrl = new URL(originUrlString)
+
+  checkIf3rdParty (details, src, dest) {
+    const tabId = details.tabId
+    if (details.frameId === 0) { // if top frame
+      this.tabHost[tabId] = src
+    }
+    return (this.tabHost[tabId] === dest)
+  }
+
+  examineUrl (details) {
+    const parsedUrl = new URL(details.url, undefined, true) // parse query
+    const parsedOriginUrl = new URL(details.originUrl)
     const src = parsedOriginUrl.hostname
     const dest = parsedUrl.hostname
-    if (src === dest) {
+    if (this.checkIf3rdParty(details, src, dest)) {
       return false // ignore if this is a 1st party request
     }
     for (let key in Object.keys(parsedUrl.query)) {
@@ -44,7 +54,7 @@ class WebRequestListener {
     // TODO:
   }
   handleBeforeRequest (details) { // for getting url and POST body
-    const is3rdParty = this.examineUrl(details.url, details.originUrl)
+    const is3rdParty = this.examineUrl(details)
     if (is3rdParty) {
       if (details.method === 'POST') {
         this.examinePostBody(details.requestBody)
@@ -52,7 +62,7 @@ class WebRequestListener {
     }
   }
   handleBeforeSendHeaders (details) { // for getting Headers and Cookies
-    const is3rdParty = this.examineUrl(details.url, details.originUrl)
+    const is3rdParty = this.examineUrl(details)
     if (is3rdParty) {
       this.examineHeader(details.requestHeaders)
     }
