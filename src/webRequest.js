@@ -10,6 +10,7 @@ class WebRequestListener {
     req.onBeforeRequest.addListener(this.handleBeforeRequest.bind(this), match, ['requestBody'])
     req.onBeforeSendHeaders.addListener(this.handleBeforeSendHeaders.bind(this), match, ['requestHeaders'])
   }
+
   logTuple (src, dest, paramKey, paramValue) {
     if (!this.data.hasOwnProperty(dest)) { // if not seen dest before
       this.data[dest] = { // create entry for this dest
@@ -36,36 +37,55 @@ class WebRequestListener {
   }
 
   examineUrl (details) {
-    const parsedUrl = new URL(details.url, undefined, true) // parse query
+    const parsedUrl = new URL(details.url, true) // parse query
     const parsedOriginUrl = new URL(details.originUrl)
     const src = parsedOriginUrl.hostname
     const dest = parsedUrl.hostname
     if (this.checkIf3rdParty(details, src, dest)) {
       return false // ignore if this is a 1st party request
     }
-    for (let key in Object.keys(parsedUrl.query)) {
+    for (let key of Object.keys(parsedUrl.query)) {
       this.logTuple(src, dest, key, parsedUrl.query[key])
     }
     return true
   }
-  examinePostBody (body) {
-    // TODO:
+
+  examinePostBody (details) {
+    const src = URL(details.originUrl).hostname
+    const dest = URL(details.url).hostname
+    const data = details.requestBody.formData
+    if (data) { // if the POST body has parsable parameters
+      for (let key of Object.keys(data)) { // data is an object
+        for (let param of data[key]) { // each value in data object is an array
+          this.logTuple(src, dest, key, param) // log each param entry in array
+        }
+      }
+    }
   }
-  examineHeader (header) { // parse through header, log any parameters found
-    // TODO:
+
+  examineHeader (details) { // parse through header, log any parameters found
+    const src = URL(details.originUrl).hostname
+    const dest = URL(details.url).hostname
+    if (details.requestHeaders) { // if there are parsable parameters
+      for (let query of details.requestHeaders) { // requestHeaders is an array
+        this.logTuple(src, dest, query.name, query.value)
+      }
+    }
   }
+
   handleBeforeRequest (details) { // for getting url and POST body
     const is3rdParty = this.examineUrl(details)
     if (is3rdParty) {
       if (details.method === 'POST') {
-        this.examinePostBody(details.requestBody)
+        this.examinePostBody(details)
       }
     }
   }
+
   handleBeforeSendHeaders (details) { // for getting Headers and Cookies
     const is3rdParty = this.examineUrl(details)
     if (is3rdParty) {
-      this.examineHeader(details.requestHeaders)
+      this.examineHeader(details)
     }
   }
 }
