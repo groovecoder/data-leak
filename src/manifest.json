@@ -17,6 +17,12 @@
     }
   ],
   "background": {
-  "scripts": ["webRequest.bundle.js."]
-}
+    "scripts": ["webRequest.bundle.js"]
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ]
 }

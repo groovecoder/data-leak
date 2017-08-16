@@ -6,8 +6,9 @@ class WebRequestListener {
     this.data = {}
     this.tabHost = []
     const req = browser.webRequest // eslint-disable-line no-undef
-    req.onBeforeRequest.addListener(this.handleBeforeRequest, undefined, ['requestBody'])
-    req.onBeforeSendHeaders.addListener(this.handleBeforeSendHeaders, undefined, ['requestHeaders'])
+    const match = {urls: ['*://*/*']}
+    req.onBeforeRequest.addListener(this.handleBeforeRequest.bind(this), match, ['requestBody'])
+    req.onBeforeSendHeaders.addListener(this.handleBeforeSendHeaders.bind(this), match, ['requestHeaders'])
   }
   logTuple (src, dest, paramKey, paramValue) {
     if (!this.data.hasOwnProperty(dest)) { // if not seen dest before

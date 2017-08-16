@@ -17,8 +17,8 @@
     "web-ext": "^1.10.1"
   },
   "scripts": {
-    "build": "MODE=production npm run bundle && web-ext build -s src",
-    "build-dev": "MODE=dev npm run bundle && web-ext build -s src",
+    "build": "MODE=production npm run bundle && web-ext build -s src --overwrite-dest",
+    "build-dev": "MODE=dev npm run bundle && web-ext build -s src --overwrite-dest",
     "bundle": "browserify -d -t envify src/webRequest.js > src/webRequest.bundle.js"
   },
   "repository": {
