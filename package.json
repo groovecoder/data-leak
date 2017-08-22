@@ -2,7 +2,12 @@
   "name": "data-leak",
   "version": "1.0.0",
   "description": "A Browser Extension to help detect potentially unsafe data leaving the browser",
+  "dependencies": {
+    "url-parse": "^1.1.9"
+  },
   "devDependencies": {
+    "browserify": "^14.4.0",
+    "envify": "^4.1.0",
     "eslint": "^4.3.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.7.0",
@@ -12,7 +17,9 @@
     "web-ext": "^1.10.1"
   },
   "scripts": {
-    "build": "web-ext build -s src"
+    "build": "MODE=production npm run bundle && web-ext build -s src --overwrite-dest",
+    "build-dev": "MODE=dev npm run bundle && web-ext build -s src --overwrite-dest",
+    "bundle": "browserify -d -t envify src/webRequest.js > src/webRequest.bundle.js"
   },
   "repository": {
     "type": "git",

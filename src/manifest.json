@@ -15,5 +15,14 @@
       "matches": ["<all_urls>"],
       "js": ["content.js"]
     }
+  ],
+  "background": {
+    "scripts": ["webRequest.bundle.js"]
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
   ]
 }
